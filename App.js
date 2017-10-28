@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
   FlatList,
+  Platform,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -45,10 +46,10 @@ const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: '#FF4200',
-    height: 80,
+    height: Platform.OS === 'ios' ? 80 : 70,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: 10
+    paddingTop: Platform.OS === 'ios' ? 10 : 20
   },
   headerText: {
     color: '#ffffff',
