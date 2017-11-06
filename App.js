@@ -39,6 +39,7 @@ export default class App extends Component {
 
   onAdd() {
     const newItem = {
+      count: 0,
       title: this.state.input
     };
     const newList = [...this.state.list, newItem];
