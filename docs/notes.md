@@ -47,7 +47,7 @@ SCHEDULE FOR TODAY
 
 ## PART 1 - INTRODUCTION
 
-* WHAT IS REACT NATIVE
+WHAT IS REACT NATIVE
     * Mobile javascript framework developed by Facebook.
     * From https://facebook.github.io/react-native/:
         * React Native lets you build mobile apps using only JavaScript. It uses the same design as React, letting you compose a rich mobile UI from declarative components.
