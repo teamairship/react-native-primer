@@ -2,26 +2,28 @@
 
 ## PART 0 - WELCOME
 
-Welcome/thank everyone who is attending in-person & virtually
-Introduce Airship team
 If you have any questions/issues during the session:
 * There will be multiple Q&A sessions throughout the event
 * Find one of our builders at Airship and they will be more than happy to assist
 **_TODO: DOWNLOAD REQUIRED SOFTWARE & CREATE ACCOUNT WITH EXPO_**
+
 OUR EXPERIENCE WITH MOBILE DEVELOPMENT
 * Native (Swift/Java)
 * PhoneGap / Cordova
 * React Native
+
 As a team, we started learning React Native about a year ago with a couple of assumptions:
 * RN would continue to thrive and and be refined
 * It would enhance the user experiences of our apps
 * It would cut development time down for cross-platform apps
+
 Months after switching over, here are a few things we saw:
 * The community around React & RN is very vibrant
 * Growing pains & bugs of using a relatively new framework are getting smaller each day
 * Our apps feel MUCH more native than other hybrid solutions we've used
 * Development time was reduced (from native especially, but also PhoneGap)
 * 100% of our team can work on our mobile projects
+
 SCHEDULE FOR TODAY
 * Introduction
   * Detail how it’s different from other hybrid app frameworks and the pros/cons
