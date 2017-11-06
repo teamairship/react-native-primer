@@ -493,9 +493,15 @@ header: {
 
 `FlatList` is a core component from RN that efficiently renders lists.
 
-* `import data from './data';`
-
 ```
+// App.js
+
+...
+
+import data from './data';
+
+...
+
 <FlatList
   data={data}
   renderItem={() => <Text>Item</Text>}
