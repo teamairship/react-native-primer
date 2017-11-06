@@ -6,7 +6,10 @@ If you have any questions/issues during the session:
 * There will be multiple Q&A sessions throughout the event
 * Find one of our builders at Airship and they will be more than happy to assist
 
-**_TODO: DOWNLOAD REQUIRED SOFTWARE & CREATE ACCOUNT WITH EXPO_**
+**_DOWNLOAD REQUIRED SOFTWARE & CREATE ACCOUNT WITH EXPO_**
+
+* Download Expo XDE - https://expo.io/tools
+* Create Account
 
 ### OUR EXPERIENCE WITH MOBILE DEVELOPMENT
 * Native (Swift/Java)
