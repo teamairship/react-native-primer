@@ -211,6 +211,7 @@ RN is compiled with Babel by default and comes with new ES6/ES7 syntax you can u
 * Constants are fixed, but variables with `let` can change
 
 #### Arrow Functions
+
 ```
 function addOne(number) {
   return number + 1;
@@ -224,16 +225,19 @@ const showText = (number) => number + 1;
 
 const showText = number => number + 1;
 ```
+
 If returning a value immediately, `{ return ... }` isn't needed.
 
 Aside from being more pleasant to read/write, arrow functions also have no binding of `this`, which helps with various issues commonly encountered.
 
 #### Destructuring
+
 ```
 const { name, email } = currentUser;
 ```
 
 #### Object Spread
+
 ```
 const currentUser = { name: 'Alex', email: 'alex@teamairship.com' };
 
@@ -241,6 +245,7 @@ const updatedUser = { ...currentUser, role: 'Builder' };
 ```
 
 #### Template Literals
+
 ```
 `My name is ${currentUser.name}`
 ```
@@ -254,6 +259,7 @@ Look at starter code in app with `View` and `Text`
 All common components from RN will have a `style` property that can adding styling. We will get into styling in the next section.
 
 One limitation currently is that you must return only one JSX element
+
 ```
 return (
   <View>
@@ -261,6 +267,7 @@ return (
   </View>
 );
 ```
+
 However in React 16 (not yet officially used in RN) you can return multiple items, which eliminates the need to have a “containing” `View`, or `div` in React.
 
 ### REACT NATIVE COMPONENTS
@@ -395,6 +402,7 @@ This isn't dynamic to different screen sizes. We need a better solution to distr
 We could use a percentage for the height here, but it is generally preferred to use `flex` to set relative size.
 
 The flex number given to a component will determine its size relative to its siblings' flex numbers.
+
 ```
 top: {
   flex: 1,
@@ -467,6 +475,7 @@ You can also have platforms use entirely different component files, if desired
 * iOS would use `Item.ios.js` and Android would use `Item.android.js`
 
 * import `Platform`
+
 ```
 header: {
   backgroundColor: '#FF4200',
@@ -485,6 +494,7 @@ header: {
 `FlatList` is a core component from RN that efficiently renders lists.
 
 * `import data from './data';`
+
 ```
 <FlatList
   data={data}
@@ -513,6 +523,7 @@ Ideally, the key would be some unique ID for an item, but for our purposes we wi
 render function that is called for each item in array
 
 Take a look at what is available:
+
 ```
 renderItem={todo => {
   console.log(item);
@@ -523,6 +534,7 @@ renderItem={todo => {
 We have an `index`, `item`, and `separators`
 
 We only care about the `item` for now, so we can destructure it right in the parameter
+
 ```
 renderItem={({ item }) => {
   return <Text>{item.title}</Text>;
@@ -530,6 +542,7 @@ renderItem={({ item }) => {
 ```
 
 To render javascript expressions inside text, you just wrap it with `{ ... }`
+
 ```
 ...
 renderItem={({ item }) => {
@@ -552,15 +565,18 @@ itemText: {
 }
 ...
 ```
+
 ### STATUS BAR
 
 The status bar at the top of the screen is currently black text, but it would look better if it matched the header text in white.
 * import `StatusBar`
+
 ```
 componentDidMount() {
   StatusBar.setBarStyle('light-content');
 }
 ```
+
 ### Q & A
 
 ## PART 4 - REFACTOR & FINISH BUILDING APP
@@ -574,6 +590,7 @@ We're going to build this component a little bit different than `App.js`
 It is going to be a new kind of component called a **_functional component_**
 
 ### Refactor `App.js` and add to `Item.js`
+
 ```
 // Item.js
 
@@ -605,7 +622,6 @@ export default Item;
 ```
 
 ```
-
 // App.js
 
 import Item from './Item';
@@ -619,6 +635,7 @@ If component needs access to state, use class. (We will discuss state next)
 Unnecessary complexity is a reason to use functional component when possible.
 
 To pass properties to components, just add the props you want to send:
+
 ```
 renderItem={({ item }) => (
   <Item title={item.title} />
@@ -626,6 +643,7 @@ renderItem={({ item }) => (
 ```
 
 Functional components will always take in `props` as a parameter
+
 ```
 const Item = props => {
   return (
@@ -643,6 +661,7 @@ We need some way to add items to this list.
 We'll create a button that, when pressed, opens a modal. The modal will contain a text field to enter in a new item and then submit, which will add the item to the list and close the modal.
 
 * import `Modal`
+
 ```
 // App.js
 
@@ -673,6 +692,7 @@ Modal is covering entire screen with a white background, and is visible by defau
 Lets style the modal with it open by default, and then we will work on triggering when to open it.
 
 To give it the effect of a typical modal we're used to, we need to create an “inner container” inside the outer View.
+
 ```
 // App.js
 
@@ -712,6 +732,7 @@ modalHeader: {
 
 Make sure `close.png` is in the `assets` folder
 * import `Image`
+
 ```
 // App.js
 
@@ -742,6 +763,7 @@ closeIcon: {
 
 ...
 ```
+
 ### STATE
 
 We need a way to keep track of the visibility of the modal. One common solution is to store a value in the component's local state.
@@ -749,13 +771,16 @@ We need a way to keep track of the visibility of the modal. One common solution 
 We can initialize state in a couple of different ways.
 
 It can be done in the `constructor` method of a class component:
+
 ```
 constructor(props) {
   super(props);
   this.state = { showModal: false };
 }
 ```
+
 Or, in RN via a Babel transformation, we can use “class properties”:
+
 ```
 class App extends Component {
   state = { showModal: false };
@@ -763,6 +788,7 @@ class App extends Component {
   ...
 }
 ```
+
 ```
 <Modal
   transparent
@@ -816,13 +842,16 @@ addIcon: {
 React gives us a method `setState` that we can use to update the current state of the component. Once the state is changed, the component will rerender to reflect the new state.
 
 * Add this to the button we just added:
+
 ```
 <TouchableOpacity
   style={styles.addContainer}
   onPress={() => this.setState({ showModal: true })}
 >
 ```
+
 * Also add `onPress` to the close icon in the modal:
+
 ```
 <TouchableOpacity
   style={styles.closeContainer}
@@ -838,6 +867,7 @@ To make the transition a bit smoother when opening/closing the modal, we can add
 ### ADD BUTTON - MODAL
 
 * Add an “add” button to the modal inside the `innerContainer`
+
 ```
 <View style={styles.innerContainer}>
   <Text style={styles.modalHeader}>ADD TO-DON'T</Text>
@@ -879,6 +909,7 @@ addButtonText: {
 
 ### TEXT INPUT TO ADD ITEM
 * import `TextInput`
+
 ```
 ...
 
@@ -900,6 +931,7 @@ input: {
 ```
 
 We can also store the value of this input in state, which will make this input “controlled” by state:
+
 ```
 ...
 
@@ -956,6 +988,7 @@ componentDidMount() {
 
 * Update `onAdd` to add new item to list
 * use spread operator to create new list array based on previous state and use setState:
+
 ```
 onAdd() {
   const newItem = {
@@ -1049,6 +1082,7 @@ onDelete() {
 
 ...
 ```
+
 ```
 // Item.js
 
@@ -1089,6 +1123,7 @@ When removing an item, the animation is a little rigid currently.
 RN exposed a couple of ways to use animation, but `LayoutAnimation` is the simplest to implement.
 
 * import `LayoutAnimation`
+
 ```
 // App.js
 
@@ -1113,6 +1148,7 @@ This will make the next render use the `easeInEaseOut` animation
 For Android animations to works, we need to add the follow:
 
 * import `NativeModules`
+
 ```
 import {
   ...
@@ -1131,6 +1167,7 @@ export default class App extends Component {
 ```
 
 `Item`'s text also needs to be transparent to not cover up the delete button when animating:
+
 ```
 ...
 
@@ -1141,6 +1178,7 @@ title: {
 
 ...
 ```
+
 ### ADD COUNTER TO ITEM
 
 Finally, lets add a counter to each item. We can do this when the component mounts with the `map` method:
@@ -1161,6 +1199,7 @@ componentDidMount() {
 ```
 
 We also need to add a `count` to `newItem` in the `onAdd` method:
+
 ```
 onAdd() {
   const newItem = {
@@ -1173,6 +1212,7 @@ onAdd() {
 ```
 
 * Pass a `count` and `onAdd` prop to `Item`
+
 ```
 // App.js
 
