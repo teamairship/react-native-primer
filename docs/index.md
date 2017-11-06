@@ -186,6 +186,12 @@ Expo Limitations:
 * It took 1 minute to get from creating the project to running on device!
 * Open up `App.js` in your code editor and make a change to the text. Save, and see that the change is immediately reflected on your device.
 
+**NOTE: SWITCH TO LAN**
+
+* Click the gear icon next to the address, and select "Host", and then "LAN"
+* This will help Expo load the app faster
+* **MOBILE DEVICE & COMPUTER MUST BE ON SAME NETWORK FOR THIS TO WORK**
+
 ### EXPO TROUBLESHOOTING
 
 If any issues arise, a few things to try:
