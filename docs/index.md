@@ -1373,15 +1373,15 @@ Take some time over the next few days to try and figure out solutions for each.
 
 ## Other Resources
 
-* React Native Documentation - http://facebook.github.io/react-native/
-* Udemy Course - https://www.udemy.com/the-complete-react-native-and-redux-course/learn/v4/
-* Ignite Starter Kit - https://github.com/infinitered/ignite
+* [React Native Documentation](http://facebook.github.io/react-native/)
+* [React Native Udemy Course](https://www.udemy.com/the-complete-react-native-and-redux-course/learn/v4/)
+* [Ignite Starter Kit](https://github.com/infinitered/ignite)
 
 ## What's Next?
 
-* State Management with **Redux**
-* Navigation with **React Navigation**
-* Native Modules with **Bridging**
-* Testing with **Jest** & **Detox**
-* Typechecking with **Flow**
-* Linting with **ESLint**
+* State Management with [**Redux**](https://redux.js.org/)
+* Navigation with [**React Navigation**](https://reactnavigation.org/)
+* Native Modules with [**Bridging**](https://facebook.github.io/react-native/docs/native-modules-ios.html)
+* Testing with [**Jest**](https://facebook.github.io/jest/) & [**Detox**](https://github.com/wix/detox)
+* Typechecking with [**Flow**](https://flow.org/en/)
+* Linting with [**ESLint**](https://eslint.org/)
