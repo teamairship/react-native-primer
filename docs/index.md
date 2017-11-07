@@ -192,7 +192,7 @@ Expo Limitations:
 **NOTE: SWITCH TO LAN**
 
 * Click the gear icon next to the address, and select "Host", and then "LAN"
-* This will help Expo load the app faster
+* This will help Expo load the app faster over our office network with this many devices
 * **MOBILE DEVICE & COMPUTER MUST BE ON SAME NETWORK FOR THIS TO WORK**
 
 ### EXPO TROUBLESHOOTING
@@ -216,8 +216,17 @@ RN is compiled with Babel by default and comes with new ES6/ES7 syntax you can u
 
 #### `class`
 
+JavaScript classes aren't exclusive to React & RN, but the frameworks recently started leveraging the new funtionality they offer (inheritance, declarations, etc).
+
+Both frameworks are possible without it, but the addition greatly enhances the developer experience.
+
 #### `const` & `let`
-* Constants are fixed, but variables with `let` can change
+
+`const` is a signal that the identifier won’t be reassigned.
+
+`let`, is a signal that the variable may be reassigned.It also signals that the variable will be used only in the block it’s defined in.
+
+No more reason to use `var`.
 
 #### Arrow Functions
 
@@ -237,13 +246,23 @@ const showText = number => number + 1;
 
 If returning a value immediately, `{ return ... }` isn't needed.
 
+If there is only one parameter, the parenthesis aren't required either.
+
 Aside from being more pleasant to read/write, arrow functions also have no binding of `this`, which helps with various issues commonly encountered.
 
 #### Destructuring
 
 ```
 const { name, email } = currentUser;
+
+const { FIRSTNAME: firstName } = user;
+
+console.log(firstName);
 ```
+
+Take properties out of an object and assign them to a variable with the same name.
+
+You can also assign them to different variables and still use destructuring.
 
 #### Object Spread
 
@@ -253,11 +272,22 @@ const currentUser = { name: 'Alex', email: 'alex@teamairship.com' };
 const updatedUser = { ...currentUser, role: 'Builder' };
 ```
 
+Takes an object and "spreads" it out into another object.
+
+This is helpful to create a new object without changing the original.
+
+
 #### Template Literals
 
 ```
-`My name is ${currentUser.name}`
+const welcome = `My name is ${currentUser.name}.`;
+
+console.log(welcome); // My name is Alex.
 ```
+
+Wrap a string with backticks `` and then use ${...} to insert a javascript expression.
+
+This replaces the need to create long confusing string concatenations.
 
 ### JSX
 
