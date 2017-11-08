@@ -410,30 +410,46 @@ The style names & values themselves are mostly the same as CSS on the web expect
 
 We can use `height` and `width` properties to position components
 * Remove all JSX expect containing `View` and add 3 views with styles
+* Be sure to remove `alignItems` and `justifyContent` from `container` style
 
 We want the middle view to be twice the size of the top, and the bottom to be twice the size of the middle.
 
 ```
-...
-<View style={styles.container}>
-  <View style={styles.top} />
-  <View style={styles.middle} />
-  <View style={styles.bottom} />
-</View>
-...
-top: {
-  height: 100,
-  backgroundColor: 'dodgerblue'
-},
-middle: {
-  height: 200,
-  backgroundColor: 'greenyellow'
-},
-bottom: {
-  height: 400,
-  backgroundColor: 'yellowgreen'
-},
-...
+// App.js
+
+import React, { Component } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+
+export default class App extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <View style={styles.top} />
+        <View style={styles.middle} />
+        <View style={styles.bottom} />
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff'
+  },
+  top: {
+    height: 100,
+    backgroundColor: 'dodgerblue'
+  },
+  middle: {
+    height: 200,
+    backgroundColor: 'greenyellow'
+  },
+  bottom: {
+    height: 400,
+    backgroundColor: 'yellowgreen'
+  }
+});
 ```
 
 This isn't dynamic to different screen sizes. We need a better solution to distribute the views evenly with the proportions we want.
@@ -465,15 +481,20 @@ This is a common practice to make sure a component is filling up all of the avai
 
 ```
 ...
-<View style={styles.container}>
-  <View style={styles.header}>
-  <Text style={styles.headerText}>TO-DON'T</Text>
+
+return (
+  <View style={styles.container}>
+    <View style={styles.header}>
+    <Text style={styles.headerText}>TO-DON'T</Text>
+    </View>
+    <View style={styles.top} />
+    <View style={styles.middle} />
+    <View style={styles.bottom} />
   </View>
-  <View style={styles.top} />
-  <View style={styles.middle} />
-  <View style={styles.bottom} />
-</View>
+);
+
 ...
+
 header: {
   backgroundColor: '#FF4200',
   height: 80,
@@ -486,6 +507,7 @@ headerText: {
   fontSize: 20,
   fontWeight: 'bold'
 },
+
 ...
 ```
 
@@ -590,6 +612,7 @@ To render javascript expressions inside text, you just wrap it with `{ ... }`
 
 ```
 ...
+
 renderItem={({ item }) => {
   return (
     <View style={styles.itemContainer}>
@@ -597,7 +620,9 @@ renderItem={({ item }) => {
     </View>
   );
 }}
+
 ...
+
 itemContainer: {
   height: 50,
   justifyContent: 'center',
@@ -608,6 +633,7 @@ itemContainer: {
 itemText: {
   fontWeight: '600'
 }
+
 ...
 ```
 
@@ -734,6 +760,13 @@ Modal is covering entire screen with a white background, and is visible by defau
 * NOTE: Android requires that Modal's have an `onRequestClose` prop.
   * `onRequestClose={() => {}}`
 
+```
+<Modal
+  transparent
+  onRequestClose={() => {}}
+>
+```
+
 Lets style the modal with it open by default, and then we will work on triggering when to open it.
 
 To give it the effect of a typical modal we're used to, we need to create an “inner container” inside the outer View.
@@ -742,7 +775,10 @@ To give it the effect of a typical modal we're used to, we need to create an “
 // App.js
 
 ...
-<Modal transparent>
+<Modal
+  transparent
+  onRequestClose={() => {}}
+>
   <View style={styles.modalContainer}>
     <View style={styles.innerContainer}>
       <Text style={styles.modalHeader}>ADD TO-DON'T</Text>
@@ -907,13 +943,27 @@ React gives us a method `setState` that we can use to update the current state o
 Now we can open and close our modal, and also keep track of its state.
 
 To make the transition a bit smoother when opening/closing the modal, we can add a default animation to it:
-* `animationType="fade"`
+
+```
+<Modal
+  animationType="fade"
+  transparent
+  onRequestClose={() => {}}
+  visible={this.state.showModal}
+>
+```
 
 ### ADD BUTTON - MODAL
 
 * Add an “add” button to the modal inside the `innerContainer`
 
 ```
+onAdd() {
+  this.setState({ showModal: false });
+}
+
+...
+
 <View style={styles.innerContainer}>
   <Text style={styles.modalHeader}>ADD TO-DON'T</Text>
 
@@ -922,14 +972,11 @@ To make the transition a bit smoother when opening/closing the modal, we can add
     onPress={() => this.onAdd()}
   >
     <Text style={styles.addButtonText}>ADD</Text>
-    </TouchableOpacity>
+  </TouchableOpacity>
 
   ...
 
-
-onAdd() {
-  this.setState({ showModal: false });
-}
+</View>
 
 ...
 
@@ -937,7 +984,9 @@ innerContainer: {
   ...
   justifyContent: 'space-between'
 },
+
 ...
+
 addButtonContainer: {
   alignItems: 'center',
   justifyContent: 'center',
@@ -949,6 +998,7 @@ addButtonText: {
   fontWeight: 'bold',
   fontSize: 20
 },
+
 ...
 ```
 
@@ -1061,11 +1111,14 @@ We could create this component ourselves, but there are a number of great RN com
 Lets add `react-native-swipeable`
 * https://github.com/jshanson7/react-native-swipeable
 * `npm install --save react-native-swipeable`
+* import `Image` & `TouchableOpacity`
 * restart packager
 * Go to github to see how it is used
 
 ```
 // Item.js
+
+...
 
 import Swipeable from 'react-native-swipeable';
 
@@ -1322,7 +1375,7 @@ container: {
   flexDirection: 'row'
 },
 countContainer: {
-  backgroundColor: 'gray',
+  backgroundColor: 'dodgerblue',
   height: 24,
   width: 24,
   borderRadius: 12,
@@ -1364,10 +1417,11 @@ addCount(item) {
 ## We're done with our app! Kind of...
 
 Although we're finished with the app, we've actually left a few remaining bugs that users are likely to encounter:
-* A user can add items without any title
-* If two items have the same title and the user deletes one, they both disappear (this also will cause a `key` error)
-* There is no way to "undo" a count if the user accidentally clicks the button
-* Triple digit numbers don't fit inside the count container as cleanly as single & double digits
+* A user can add items without any title.
+* If two items have the same title and the user deletes one, they both disappear (this also will cause a `key` error).
+* There is no way to "undo" a count if the user accidentally clicks the button.
+* Each time the app reloads, the data is reset to our sample data.
+* Triple digit numbers don't fit inside the count container as cleanly as single & double digits.
 
 Take some time over the next few days to try and figure out solutions for each.
 
