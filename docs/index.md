@@ -222,6 +222,8 @@ Both frameworks are possible without it, but the addition greatly enhances the d
 
 #### `const` & `let`
 
+Replacements for `var`
+
 `const` is a signal that the identifier won’t be reassigned.
 
 `let`, is a signal that the variable may be reassigned.It also signals that the variable will be used only in the block it’s defined in.
@@ -231,28 +233,31 @@ No more reason to use `var`.
 #### Arrow Functions
 
 ```
-function addOne(number) {
-  return number + 1;
+function addOne(value) {
+  return value + 1;
 };
 
-const showText = (number) => {
-  return number + 1;
+const addOne = (value) => {
+  return value + 1;
 };
 
-const showText = (number) => number + 1;
-
-const showText = number => number + 1;
+const addOne = value => value + 1;
 ```
 
-If returning a value immediately, `{ return ... }` isn't needed.
-
-If there is only one parameter, the parenthesis aren't required either.
+* Named functions can be assigned to a variable
+* If returning a value immediately, `{ return ... }` isn't needed.
+* If there is only one parameter, the parenthesis aren't required either.
 
 Aside from being more pleasant to read/write, arrow functions also have no binding of `this`, which helps with various issues commonly encountered.
 
 #### Destructuring
 
 ```
+// Old Way
+var email = currentUser.email;
+var name = currentUser.name;
+
+// New Way
 const { name, email } = currentUser;
 
 const { FIRSTNAME: firstName } = user;
@@ -267,8 +272,19 @@ You can also assign them to different variables and still use destructuring.
 #### Object Spread
 
 ```
-const currentUser = { name: 'Alex', email: 'alex@teamairship.com' };
+const currentUser = {
+  name: 'Alex',
+  email: 'alex@teamairship.com'
+};
 
+// Old Way
+const updatedUser = Object.assign(
+  {},
+  currentUser,
+  { role: 'Builder' }
+);
+
+// New Way
 const updatedUser = { ...currentUser, role: 'Builder' };
 ```
 
@@ -280,14 +296,18 @@ This is helpful to create a new object without changing the original.
 #### Template Literals
 
 ```
-const welcome = `My name is ${currentUser.name}.`;
+// Old Way
+var welcome = 'My name is ' + firstName + lastName '.';
 
-console.log(welcome); // My name is Alex.
+// New Way
+const welcome = `My name is ${firstName} ${lastName}.`;
+
+console.log(welcome); // My name is Alex Hinson.
 ```
 
 Wrap a string with backticks `` and then use ${...} to insert a javascript expression.
 
-This replaces the need to create long confusing string concatenations.
+This replaces the need to create confusing string concatenations.
 
 ### JSX
 
