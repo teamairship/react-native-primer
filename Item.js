@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain'
   },
   countContainer: {
-    backgroundColor: 'gray',
+    backgroundColor: 'dodgerblue',
     height: 24,
     width: 24,
     borderRadius: 12,
