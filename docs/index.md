@@ -260,9 +260,10 @@ var name = currentUser.name;
 // New Way
 const { name, email } = currentUser;
 
-const { FIRSTNAME: firstName } = user;
+const { BADLYFORMATTED: goodlyFormatted } = response;
 
-console.log(firstName);
+console.log(goodlyFormattedProp);
+
 ```
 
 Take properties out of an object and assign them to a variable with the same name.
@@ -297,7 +298,7 @@ This is helpful to create a new object without changing the original.
 
 ```
 // Old Way
-var welcome = 'My name is ' + firstName + lastName '.';
+var welcome = 'My name is ' + firstName + ' ' + lastName '.';
 
 // New Way
 const welcome = `My name is ${firstName} ${lastName}.`;
